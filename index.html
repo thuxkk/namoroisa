@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para o amor da minha vida</title>
+<link rel="icon" href="favicon.ico">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="favicon2.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+  background:radial-gradient(circle at top,#4b145d,#120016);
+  overflow-x:hidden;
+}
+body.lock{overflow:hidden}
+
+
+/* CORAÇÕES */
+.hearts{position:fixed;inset:0;pointer-events:none;z-index:0}
+.heart{
+  position:absolute;
+  color:rgba(255,122,191,.25);
+  animation:float linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(100vh) scale(.6)}
+  to{transform:translateY(-10vh) scale(1.2)}
+}
+
+/* SEÇÕES */
+section{
+  padding:60px 20px;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+h1,h2{font-family:'Playfair Display',serif}
+.subtitle{opacity:.75;font-size:.9rem}
+
+/* CONTADOR */
+.counter{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:35px;
+}
+.box{
+  width:90px;
+  padding:18px 10px;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+}
+.box span{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  color:#ffb3dc;
+}
+.box small{font-size:.65rem;opacity:.7}
+.total{margin-top:18px;font-size:.85rem;opacity:.85}
+
+/* PLAYER */
+.player{
+  max-width:340px;
+  margin:0 auto;
+  background:rgba(255,255,255,.07);
+  padding:22px;
+  border-radius:22px;
+}
+
+/* TEXTO */
+.text-box{
+  max-width:360px;
+  margin:0 auto;
+  background:rgba(255,255,255,.06);
+  padding:24px;
+  border-radius:20px;
+  line-height:1.7;
+}
+
+/* CARROSSEL */
+.carousel{
+  position:relative;
+  max-width:320px;
+  margin:40px auto 0;
+  overflow:hidden;
+}
+.track{display:flex;transition:.4s ease}
+.track img{
+  width:320px;
+  height:320px;
+  object-fit:cover;
+  border-radius:20px;
+  flex-shrink:0;
+}
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.4);
+  border:none;
+  color:#fff;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:22px;
+}
+.arrow.left{left:10px}
+.arrow.right{right:10px}
+
+.dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+}
+.dots span{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(255,255,255,.3);
+}
+.dots .active{background:#ff7abf}
+
+/* HISTÓRIA */
+.timeline{max-width:360px;margin:0 auto}
+.event{
+  background:rgba(255,255,255,.06);
+  padding:18px;
+  border-radius:18px;
+  margin-bottom:16px;
+}
+
+/* BOTÃO FINAL */
+.final-trigger{
+  margin-top:30px;
+  font-size:30px;
+  cursor:pointer;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+
+/* MENSAGEM FINAL */
+.final-message{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top,#5a1a70,#120016);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9998;
+  opacity:0;
+  visibility:hidden;
+  transition:.8s;
+}
+.final-message.show{
+  opacity:1;
+  visibility:visible;
+}
+.final-box{
+  background:rgba(255,255,255,.08);
+  padding:40px 30px;
+  border-radius:26px;
+  max-width:340px;
+  text-align:center;
+}
+
+/* TELA SURPRESA – ESTILO PREMIUM */
+#surprise{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(120deg,#2a002f,#120016,#3b0045);
+  background-size:300% 300%;
+  animation:bgMove 10s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  transition:.9s ease;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+#surprise.hide{
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.05);
+}
+
+.surprise-box{
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  padding:46px 34px;
+  border-radius:30px;
+  text-align:center;
+  max-width:320px;
+  animation:fadeUp .9s ease;
+  box-shadow:0 0 60px rgba(255,0,150,.25);
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.surprise-box h1{
+  font-family: 'Great Vibes', cursive;
+  font-size:2.2rem;
+  margin-bottom:10px;
+}
+
+.surprise-box p{
+  font-size:.95rem;
+  opacity:.85;
+}
+
+.surprise-box button{
+  margin-top:26px;
+  padding:14px 42px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(135deg,#ff7abf,#ff4fa1);
+  color:#fff;
+  font-size:.95rem;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.surprise-box button:hover{
+  transform:scale(1.07);
+  box-shadow:0 0 25px rgba(255,122,191,.7);
+}
+</style>
+</head>
+
+<body class="lock">
+
+<!-- TELA SURPRESA -->
+<div id="surprise">
+  <div class="surprise-box">
+    <h1>Ei, amor…</h1>
+    <p>
+      Eu preparei isso com carinho,<br>
+      é só pra você 🤍
+    </p>
+    <button id="enterBtn">Abrir</button>
+  </div>
+</div>
+
+<div class="hearts"></div>
+
+<section>
+  <h1>Para o amor da minha vida!</h1>
+  <div class="subtitle">Juntos desde 04 de novembro de 2024</div>
+
+  <div class="counter">
+    <div class="box"><span id="months">0</span><small>MESES</small></div>
+    <div class="box"><span id="days">0</span><small>DIAS</small></div>
+    <div class="box"><span id="hours">0</span><small>HORAS</small></div>
+    <div class="box"><span id="minutes">0</span><small>MIN</small></div>
+  </div>
+  <div class="total" id="totalDays"></div>
+</section>
+
+<section>
+  <div class="player">
+    <strong>Nossa Música</strong>
+    <iframe style="margin-top:12px;border-radius:12px"
+      src="https://open.spotify.com/embed/track/5XeFesFbtLpXzIVDNQP22n?si=f851cd99086542d7"
+      width="100%" height="80"
+      frameborder="0"
+      allow="autoplay; encrypted-media">
+    </iframe>
+  </div>
+</section>
+
+<section>
+  <div class="text-box">
+    Toda vez em que vejo seu belo rosto eu relembro do dia do nosso primeiro beijo, toda vez que lembro dele, eu sinto um mix de sentimentos muito bom, foi no momento em que você me beijou daquele jeito gostoso que eu percebi que você seria a mulher que eu queria chamar de namorada, e, mais tarde, de esposa. Desde o primeiro dia de aula eu percebi que eu não era nada em comparação a você, você tem um rosto perfeito, um corpo lindo, uma voz encantadora, e, depois do nosso primeiro beijo, percebi que você tinha uma boca muito gostosa de se beijar. Quero também poder realizar seu sonho de ter uma Aurorazinha para podermos chamar de filha, mesmo que eu não consiga decidir o gênero por conta própria kkkkkk, mas, se vier a ser menino, nós poderíamos ter um Yagozinho em vez disso. Também quero passar todos os dias da minha vida acompanhado de você, a pessoa que mais amo, porquê quando estou com você eu me sinto mais confortável de ser eu mesmo sem que eu seja julgado por ser "estranho", sou um pouco chato e birrento as vezes mas releva essas partes kkkkk. Não quero nunca me separar de você, porque você é a pessoa mais importante da minha vida, depois de você, será a Aurorazinha/Yagozinho. Eu te amo minha princesa 🩷🩷💗🫶 ;p.
+  </div>
+</section>
+
+<section>
+  <h2>Nossos Momentos</h2>
+  <div class="carousel">
+    
+    <div class="track" id="track">
+      <img src="images/1.jpeg">
+      <img src="images/2.jpeg">
+      <img src="images/3.jpeg">
+      <img src="images/4.jpeg">
+      <img src="images/5.jpeg">
+      <img src="images/6.jpeg">
+      <img src="images/7.jpeg">
+      <img src="images/8.png">
+      <img src="images/9.png">
+      <img src="images/10.png">
+      <img src="images/11.png">
+    </div>
+    <button class="arrow left" onclick="prev()">‹</button>
+    <button class="arrow right" onclick="next()">›</button>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="text-box" id="imageDescription" style="margin-top:18px">
+  Nosso encontro na Bengô 💜
+</div>
+</section>
+
+<section>
+  <h2>Nossa Timeline</h2>
+  <div class="timeline">
+    <div class="event">💜 24/02/2024: O dia em que te vi pela primeira vez</div>
+    <div class="event">💋 19/04/2024: Nosso primeiro beijo (2 meses de diferença, como assim)</div>
+    <div class="event">💍 04/11/2025: O pedido de namoro</div>
+    <div class="event">💍 04/11/2026: 1 ano de namoro oficial</div>
+  </div>
+
+  <div class="final-trigger">💜</div>
+</section>
+
+<!-- MENSAGEM FINAL -->
+<div class="final-message" id="finalMessage">
+  <div class="final-box">
+    <h2>Pra sempre nós dois</h2>
+    <p>
+      Se você chegou até aqui, é porque tudo isso valeu a pena.
+      Você é a melhor escolha que eu já fiz. Eu te amo 💗💗
+    </p>
+  </div>
+</div>
+
+<script>
+// ENTRADA
+const surprise=document.getElementById("surprise");
+document.getElementById("enterBtn").onclick=()=>{
+  surprise.classList.add("hide");
+  document.body.classList.remove("lock");
+};
+
+// CONTADOR
+const start=new Date("2024-11-04T00:00:00");
+setInterval(()=>{
+  const now=new Date();
+  const diff=Math.floor((now-start)/1000);
+  months.innerText=Math.floor(diff/2592000);
+  days.innerText=Math.floor(diff/86400)%30;
+  hours.innerText=Math.floor(diff/3600)%24;
+  minutes.innerText=Math.floor(diff/60)%60;
+  totalDays.innerText=`São ${Math.floor(diff/86400)} dias de amor 💕`;
+},1000);
+
+// CORAÇÕES
+const hearts=document.querySelector(".hearts");
+for(let i=0;i<25;i++){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤";
+  h.style.left=Math.random()*100+"%";
+  h.style.fontSize=12+Math.random()*20+"px";
+  h.style.animationDuration=8+Math.random()*10+"s";
+  hearts.appendChild(h);
+}
+
+// CARROSSEL
+// CARROSSEL + DESCRIÇÕES
+let index = 0;
+const track = document.getElementById("track");
+const dots = document.getElementById("dots");
+const descriptionBox = document.getElementById("imageDescription");
+
+const descriptions = [
+  "Nosso encontro na Bengô 💜", //1
+  "Quando fomos na hamburgueira (você tava muito linda) ✨", //2
+  "Uma foto aleatória nossa", //3
+  "A gente no evento da igreja 🤍", //4
+  "Nós depois do evento", //5
+  "A foto que até hoje ta no meu celular (gosto muito dela)", //6
+  "Essa foto ainda é muito boa kkkk", //7
+  "Nossos personagens atualizados do Picrew", //8
+  "Nois mas eu to de cabelo liso", //9
+  "Muito estilizadinhos", //10
+  "Nois se beijando", //11
+];
+
+for (let i = 0; i < track.children.length; i++) {
+  const d = document.createElement("span");
+  if (i === 0) d.classList.add("active");
+  dots.appendChild(d);
+}
+
+function updateCarousel() {
+  track.style.transform = `translateX(-${index * 320}px)`;
+
+  dots.querySelectorAll("span").forEach((d, i) =>
+    d.classList.toggle("active", i === index)
+  );
+
+  descriptionBox.innerText = descriptions[index] || "";
+}
+
+function next() {
+  index = (index + 1) % track.children.length;
+  updateCarousel();
+}
+
+function prev() {
+  index = (index - 1 + track.children.length) % track.children.length;
+  updateCarousel();
+}
+
+// SWIPE
+let startX=0;
+track.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+track.addEventListener("touchend",e=>{
+  const dx=e.changedTouches[0].clientX-startX;
+  if(dx>50)prev();
+  if(dx<-50)next();
+});
+
+// MENSAGEM FINAL
+document.querySelector(".final-trigger").onclick=()=>{
+  document.getElementById("finalMessage").classList.add("show");
+};
+</script>
+
+</body>
+</html>
